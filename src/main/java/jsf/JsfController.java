@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component(value = "JsfController")
 public class JsfController {
 
-    
+
 
 }

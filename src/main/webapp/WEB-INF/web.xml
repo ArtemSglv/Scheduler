@@ -4,6 +4,6 @@
     <load-on-startup>1</load-on-startup>
 </servlet>
 <servlet-mapping>
-<servlet-name>JSF</servlet-name>
-<url-pattern>*.xhtml</url-pattern>
+    <servlet-name>JSF</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
 </servlet-mapping>

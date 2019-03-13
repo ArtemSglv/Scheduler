@@ -28,10 +28,22 @@ public class PropertiesHandler {
             prop.store(new FileOutputStream(PROPERTIES_URI),null);//как закрывать файл?
         }
 
-        public Set<String> getAllNames() throws IOException{
+        public String[] getAllNames() throws IOException{
             Properties prop = PropertiesHandler.loadPropertiesFile();
-            return prop.stringPropertyNames();
+            Set<String> s = prop.stringPropertyNames();
+            return s.toArray(new String[s.size()]);
         }
+        public String[] getAllUrls() throws IOException{
+            Properties prop = PropertiesHandler.loadPropertiesFile();
+            PropertiesHandler p = new PropertiesHandler();
+            String[] names = p.getAllNames();
+            String[] urls = new String[names.length];
+            for(int i = 0; i < names.length; i++)
+                names[i] = p.getUrlByName(names[i]);
+            return names;
+
+        }
+
         public static Properties loadPropertiesFile() throws IOException {
             FileInputStream fis = new FileInputStream(PROPERTIES_URI);;
             Properties prop = new Properties();
@@ -50,6 +62,8 @@ public class PropertiesHandler {
         ph.addParsingTarget("asd", "123");
         System.out.println(ph.getUrlByName("asd"));
         for(String str : ph.getAllNames())
+            System.out.println(str);
+        for(String str : ph.getAllUrls())
             System.out.println(str);
     }
 }

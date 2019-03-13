@@ -8,12 +8,26 @@
     </h:head>
     <h:body>
         <div>
-            <p>Welcome in scheduler!</p>
-            <p style="height:50px">
-                This is a static message rendered from xhtml.
-            </p>
+            <p>Welcome to scheduler!</p>
+            <h:selectManyCheckbox>
+                <f:selectItem itemValue="1" itemLabel="parse 1" />
+                <f:selectItem itemValue="2" itemLabel="parse 2" />
+                <f:selectItem itemValue="3" itemLabel="parse 3" />
+            </h:selectManyCheckbox>
+        </div>
+        <div>
+            <h:dataTable >
+                <h:column>
+                    <f:facet name="Parser"></f:facet>
+                </h:column>
+            </h:dataTable>
+        </div>
+
+        <div>
             <h:form>
-                <h:commandButton value="Load scheduler page!" action="#{jsfController.loadSchedulerPage}" />
+                <h:commandButton value="add" action="#{propertiesHandler.loadSchedulerPage}"/>
+                <h:commandButton value="parse" action="#{JsfController.loadSchedulerPage}"/>
+                <h:commandButton value="parse all" action="#{JsfController.loadSchedulerPage}"/>
             </h:form>
         </div>
     </h:body>

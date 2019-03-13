@@ -31,6 +31,7 @@ public class PropertiesHandler {
         public String[] getAllNames() throws IOException{
             Properties prop = PropertiesHandler.loadPropertiesFile();
             Set<String> s = prop.stringPropertyNames();
+            System.out.println("!");
             return s.toArray(new String[s.size()]);
         }
         public String[] getAllUrls() throws IOException{

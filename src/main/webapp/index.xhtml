@@ -25,9 +25,10 @@
 
         <div>
             <h:form>
-                <h:commandButton value="add" action="#{asd}"/>
+                <h:commandButton value="add" action="#{propertiesHandler.addParsingTarget}"/>
                 <h:commandButton value="parse" action="#{scheduler.runParser}"/>
                 <h:commandButton value="parse all" action="#{scheduler.parseAll}"/>
+                <h:commandButton value="refresh" action="#{propertiesHandler.getAllNames}"/>
             </h:form>
         </div>
     </h:body>

@@ -1,12 +1,18 @@
 <f:view xmlns="http://www.w3c.org/1999/xhtml"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <f:metadata>
+            <f:viewAction action="#{jsfController2.init}" />
+        </f:metadata>
         <title>TO-DO application</title>
     </h:head>
+
     <h:body>
+
         <div>
             <p>Welcome to scheduler!</p>
             <h:selectManyCheckbox>
@@ -16,11 +22,20 @@
             </h:selectManyCheckbox>
         </div>
         <div>
-            <h:dataTable >
-                <h:column>
-                    <f:facet name="Parser"></f:facet>
-                </h:column>
-            </h:dataTable>
+            <p:dataTable var="site" value="#{jsfController2.sourceParseInformations}">
+                <p:column headerText="Name">
+                    <h:outputText value="#{site.name}" />
+                </p:column>
+
+                <p:column headerText="date of last parsing">
+                    <h:outputText value="#{site.date}" />
+                </p:column>
+
+                <p:column headerText="description">
+                    <h:outputText value="#{site.description}" />
+                </p:column>
+
+            </p:dataTable>
         </div>
 
         <div>

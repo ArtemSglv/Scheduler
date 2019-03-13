@@ -60,7 +60,6 @@ public class PropertiesHandler {
         System.out.println(ph.getUrlByName("afishaTheatre"));
         System.out.println(ph.getUrlByName("afishaExhibition"));
         System.out.println(ph.getUrlByName("afishaConcert"));
-        ph.addParsingTarget("asd", "123");
         System.out.println(ph.getUrlByName("asd"));
         for(String str : ph.getAllNames())
             System.out.println(str);

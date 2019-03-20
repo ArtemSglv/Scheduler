@@ -16,8 +16,6 @@ import java.util.Date;
 
 @Configuration
 @EnableScheduling
-@Scope(value = "session")
-@Component(value = "scheduler")
 public class Scheduler {
     static final String PARSER_URL = "http://localhost:8082/parse_all";
     static final String CRON_EXP = "0 0 3 * * ?";
@@ -34,10 +32,6 @@ public class Scheduler {
         //parseSelected("https://www.afisha.ru");
         System.out.println("Now: " + new Date());
     }
-
-
-
-
 
 }
 

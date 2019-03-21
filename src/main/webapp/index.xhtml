@@ -6,7 +6,7 @@
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <f:metadata>
-            <f:viewAction action="#{SchedulerController.init}"/>
+            <f:viewAction action="#{schedulerController.init}"/>
         </f:metadata>
         <title>TO-DO application</title>
     </h:head>
@@ -14,10 +14,11 @@
     <h:body>
         <div>
             <h:form>
+                <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"/>
                 <p:dataTable var="sourceInfo"
                              rowKey="#{sourceInfo.name}"
-                             value="#{SchedulerController.sourceParseInformations}"
-                             selection="#{SchedulerController.selectedInfos}">
+                             value="#{schedulerController.sourceParseInformations}"
+                             selection="#{schedulerController.selectedInfos}">
 
                     <p:column selectionMode="multiple"/>
 
@@ -29,12 +30,8 @@
                         <h:outputText value="#{sourceInfo.date}"/>
                     </p:column>
 
-                    <p:column headerText="Description">
-                        <h:outputText value="#{sourceInfo.description}"/>
-                    </p:column>
                 </p:dataTable>
                 <p:commandButton value="parse" action="#{schedulerController.parseSelected}"/>
-                <p:commandButton value="add" action="#{propertiesHandler.addParsingTarget}"/>
                 <p:commandButton value="parse all" action="#{schedulerController.parseAll}"/>
             </h:form>
         </div>

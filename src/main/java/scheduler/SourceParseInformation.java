@@ -3,26 +3,28 @@ package scheduler;
 import PropertiesHandlers.PropertiesHandler;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
 
 public class SourceParseInformation {
     private String name;
-    private Date date;
-    private String description;
+    private LocalDateTime date;
 
-    public SourceParseInformation(String name, Date date, String description) {
+
+    public SourceParseInformation(String name, LocalDateTime date) {
         this.name = name;
         this.date = date;
-        this.description = description;
+
     }
 
     public static   ArrayList<SourceParseInformation> getInfoForTable() throws IOException {
         ArrayList<SourceParseInformation> infos = new ArrayList<>();
-        String[] names = new PropertiesHandler().getAllNames();
+        String[] names = PropertiesHandler.getAllNames();
+
         for (int i = 0; i < names.length; i++)
-            infos.add(new SourceParseInformation(names[i],new Date(), "asd"));
+            infos.add(new SourceParseInformation(names[i],PropertiesHandler.getDateByName(names[i]) ));
 
         return infos;
 
@@ -36,25 +38,18 @@ public class SourceParseInformation {
         this.name = name;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
     public void show(){
         System.out.println("name:" + name);
         System.out.println("date:" + date);
-        System.out.println("description:" + description);
+
     }
 
 

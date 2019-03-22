@@ -5,15 +5,18 @@
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <h:outputStylesheet library="primefaces-excite-bike" name="theme.css"/>
         <f:metadata>
             <f:viewAction action="#{schedulerController.init}"/>
         </f:metadata>
-        <title>TO-DO application</title>
+        <title>Manual control for parser </title>
     </h:head>
 
     <h:body>
+
         <div>
             <h:form>
+                <h2 align="center">Here you can force parsing some resources</h2>
                 <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"/>
                 <p:dataTable var="sourceInfo"
                              rowKey="#{sourceInfo.name}"
@@ -26,13 +29,17 @@
                         <h:outputText value="#{sourceInfo.name}"/>
                     </p:column>
 
-                    <p:column headerText="ParseDate">
+                    <p:column headerText="Date of last parsing">
                         <h:outputText value="#{sourceInfo.date}"/>
                     </p:column>
 
+                    <p:column headerText="Description">
+                        <h:outputText value="#{sourceInfo.description}"/>
+                    </p:column>
+
                 </p:dataTable>
-                <p:commandButton value="parse" action="#{schedulerController.parseSelected}"/>
-                <p:commandButton value="parse all" action="#{schedulerController.parseAll}"/>
+                <p:commandButton value="parse" action="#{schedulerController.parseSelected}" align="center"/>
+                <p:commandButton value="parse all" action="#{schedulerController.parseAll}" align="center"/>
             </h:form>
         </div>
     </h:body>

@@ -11,11 +11,20 @@ import java.util.Date;
 public class SourceParseInformation {
     private String name;
     private LocalDateTime date;
+    private String description;
 
+    public String getDescription() {
+        return description;
+    }
 
-    public SourceParseInformation(String name, LocalDateTime date) {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public SourceParseInformation(String name, LocalDateTime date, String description) {
         this.name = name;
         this.date = date;
+        this.description = description;
 
     }
 
@@ -24,7 +33,8 @@ public class SourceParseInformation {
         String[] names = PropertiesHandler.getAllNames();
 
         for (int i = 0; i < names.length; i++)
-            infos.add(new SourceParseInformation(names[i],PropertiesHandler.getDateByName(names[i]) ));
+            infos.add(new SourceParseInformation(names[i],PropertiesHandler.getDateByName(names[i]),
+                            PropertiesHandler.getDescriptionByName(names[i]) ));
 
         return infos;
 
@@ -49,7 +59,7 @@ public class SourceParseInformation {
     public void show(){
         System.out.println("name:" + name);
         System.out.println("date:" + date);
-
+        System.out.println("description:" + description);
     }
 
 

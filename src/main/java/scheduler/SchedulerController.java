@@ -1,6 +1,8 @@
 package scheduler;
 
 import PropertiesHandlers.PropertiesHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -30,17 +32,26 @@ import static scheduler.Scheduler.PARSER_URL;
 public class SchedulerController {
     private List<SourceParseInformation> sourceParseInformations;
     private SourceParseInformation[] selectedInfos;
+    private String theme = "smoothness";
+    //<h:outputStylesheet library="primefaces-omega" name="theme.css"/>
+    //<link rel="stylesheet" type="text/css" href="#{request.contextPath}/themes/redmond/skin.css"/>
+    private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
 
 
     public String parse(String whatToParse){
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        RestTemplate rt = new RestTemplate();
-        // Data attached to the request.
-        HttpEntity<String> requestBody = new HttpEntity<>(whatToParse, headers);
-        // Send request with POST method.
-        return rt.postForObject(PARSER_URL, requestBody, String.class);
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            RestTemplate rt = new RestTemplate();
+            // Data attached to the request.
+            HttpEntity<String> requestBody = new HttpEntity<>(whatToParse, headers);
+            // Send request with POST method.
+            return rt.postForObject(PARSER_URL, requestBody, String.class);
+        }catch (Exception e){
+            logger.warn("Error while parsing " + whatToParse);
+            return null;
+        }
     }
 
 
@@ -79,13 +90,14 @@ public class SchedulerController {
                 isOk = false;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                         "Warning!", "error while parsing " + url));
-                System.out.println("error while parsing " + url);
+                logger.warn("error while parsing " + url);
             }
         }
         if (isOk) FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                 "Info", "OK"));
-        System.out.println("ok");
+
     }
+
 
 
     public void init() throws IOException {
@@ -111,4 +123,11 @@ public class SchedulerController {
         this.selectedInfos = selectedInfos;
     }
 
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 }

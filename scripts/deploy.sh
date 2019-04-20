@@ -3,7 +3,7 @@
 echo 'Copy files...'
 
 scp -i ~/.ssh/id_rsa \
-    target/AfishaParserService-0.1.0.jar \
+    target/Scheduler-1.0-SNAPSHOT.jar \
     $REMOTEUSER@$REMOTEHOST:$REMOTEAPPDIR
 
 echo 'Bye'

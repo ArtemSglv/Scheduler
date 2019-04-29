@@ -1,17 +1,12 @@
-package scheduler;
+package com.lemmeknow.controllers;
 
-import PropertiesHandlers.PropertiesHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.Date;
@@ -21,7 +16,8 @@ import java.util.Date;
 @Scope(value = "session")
 @Component(value = "scheduler")
 public class Scheduler {
-    static final String PARSER_URL = "http://localhost:8082/parse_all";
+    //todo: remove localhost
+    static final String PARSER_URL = "http://lemmeknow.tk:8094/parse_all";
     private Logger logger = LoggerFactory.getLogger(Scheduler.class);
     static final String CRON_EXP = "0 0 3 * * ?";
 
@@ -31,6 +27,7 @@ public class Scheduler {
         logger.info("time to parse everything");
         try {
             new SchedulerController().parseAll();
+            logger.info("everything is OK");
         } catch (IOException e) {
             logger.info("something gone wrong");
             e.printStackTrace();
@@ -38,11 +35,11 @@ public class Scheduler {
 
     }
 // для тестирования
- //   @Scheduled(fixedRate = 6000)
+    /*@Scheduled(fixedRate = 6000)
     public void testScheduler(){
         //parseSelected("https://www.afisha.ru");
         System.out.println("Now: " + new Date());
-    }
+    }*/
 
 
 

@@ -1,11 +1,8 @@
-package scheduler;
-
-import PropertiesHandlers.PropertiesHandler;
+package com.lemmeknow.controllers;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class SourceParseInformation {
@@ -29,6 +26,7 @@ public class SourceParseInformation {
     }
 
     public static   ArrayList<SourceParseInformation> getInfoForTable() throws IOException {
+        //todo: relative file path
         ArrayList<SourceParseInformation> infos = new ArrayList<>();
         String[] names = PropertiesHandler.getAllNames();
 

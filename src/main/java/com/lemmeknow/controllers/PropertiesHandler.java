@@ -1,12 +1,9 @@
-package PropertiesHandlers;
+package com.lemmeknow.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -19,7 +16,7 @@ public class PropertiesHandler {
     private PropertiesHandler() {
     }
 
-    private static final String PROPERTIES_URI = "src/main/resources/schedule.properties";
+    private static final String PROPERTIES_URI = "/home/deploy/nc-project/scheduler.properties";
     private static Logger logger = LoggerFactory.getLogger(PropertiesHandler.class);
 
     public static String getUrlByName(String propName) {

@@ -1,39 +1,29 @@
-package scheduler;
+package com.lemmeknow.controllers;
 
-import PropertiesHandlers.PropertiesHandler;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import scheduler.SourceParseInformation;
-
-
-import javax.annotation.ManagedBean;
-import javax.annotation.PostConstruct;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-
-
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.*;
-
-import static scheduler.Scheduler.PARSER_URL;
+import java.util.List;
 
 
 @Named
-@ManagedBean
 public class SchedulerController {
+	private final static String PARSER_URL = "http://lemmeknow.tk:8094/parse_all";
+
     private List<SourceParseInformation> sourceParseInformations;
     private SourceParseInformation[] selectedInfos;
     private String theme = "smoothness";
-    //<h:outputStylesheet library="primefaces-omega" name="theme.css"/>
+    //<h:outputStylesheet library="controllers-omega" name="theme.css"/>
     //<link rel="stylesheet" type="text/css" href="#{request.contextPath}/themes/redmond/skin.css"/>
     private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
 
@@ -102,6 +92,7 @@ public class SchedulerController {
 
     public void init() throws IOException {
         sourceParseInformations = SourceParseInformation.getInfoForTable();
+//        sourceParseInformations = new ArrayList<>();
         selectedInfos = new SourceParseInformation[sourceParseInformations.size()];
     }
 

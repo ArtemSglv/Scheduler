@@ -19,6 +19,7 @@ import java.util.List;
 @Named
 public class SchedulerController {
 	private final static String PARSER_URL = "http://lemmeknow.tk:8094/parser/parse";
+	private final static String PARSER1_URL = "/parser/parse";
 
     private List<SourceParseInformation> sourceParseInformations;
     private SourceParseInformation[] selectedInfos;
@@ -37,7 +38,7 @@ public class SchedulerController {
             // Data attached to the request.
             HttpEntity<String> requestBody = new HttpEntity<>(whatToParse, headers);
             // Send request with POST method.
-            return rt.postForObject(PARSER_URL, requestBody, String.class);
+            return rt.postForObject(PARSER_URL1, requestBody, String.class);
         }catch (Exception e){
             logger.warn("Error while parsing " + whatToParse);
             return null;

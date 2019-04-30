@@ -5,7 +5,7 @@
 
   <groupId>com.lemmeknow</groupId>
   <artifactId>Scheduler</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Scheduler</name>

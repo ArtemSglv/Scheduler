@@ -17,7 +17,6 @@ import java.util.Date;
 @Component(value = "scheduler")
 public class Scheduler {
     //todo: remove localhost
-    static final String PARSER_URL = "http://lemmeknow.tk:8094/parse_all";
     private Logger logger = LoggerFactory.getLogger(Scheduler.class);
     static final String CRON_EXP = "0 0 3 * * ?";
 

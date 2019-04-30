@@ -16,6 +16,13 @@
     <version>2.1.0.RELEASE</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
+  <repositories>
+    <repository>
+      <id>prime-repo</id>
+      <name>Prime Repo</name>
+      <url>http://repository.primefaces.org</url>
+    </repository>
+  </repositories>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

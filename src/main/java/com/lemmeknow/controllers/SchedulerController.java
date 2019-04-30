@@ -38,7 +38,7 @@ public class SchedulerController {
             // Data attached to the request.
             HttpEntity<String> requestBody = new HttpEntity<>(whatToParse, headers);
             // Send request with POST method.
-            return rt.postForObject(PARSER_URL1, requestBody, String.class);
+            return rt.postForObject(PARSER_URL, requestBody, String.class);
         }catch (Exception e){
             logger.warn("Error while parsing " + whatToParse);
             return null;

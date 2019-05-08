@@ -16,7 +16,6 @@ import java.util.Date;
 @Scope(value = "session")
 @Component(value = "scheduler")
 public class Scheduler {
-    //todo: remove localhost
     private Logger logger = LoggerFactory.getLogger(Scheduler.class);
     static final String CRON_EXP = "0 0 3 * * ?";
 

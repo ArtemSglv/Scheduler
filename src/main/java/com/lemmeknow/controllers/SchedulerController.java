@@ -18,6 +18,7 @@ import java.util.List;
 
 @Named
 public class SchedulerController {
+    private final static String LOCAL_PARSER_URL = "http://localhost:8094/parser/parse";
 	private final static String PARSER_URL = "http://lemmeknow.tk:8094/parser/parse";
 	private final static String PARSER1_URL = "/parser/parse";
 

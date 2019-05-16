@@ -17,7 +17,7 @@ import java.util.Date;
 @Component(value = "scheduler")
 public class Scheduler {
     private Logger logger = LoggerFactory.getLogger(Scheduler.class);
-    static final String CRON_EXP = "0 0 3 * * ?";
+    private static final String CRON_EXP = "0 0 3 * * ?";
 
 //https://dzone.com/articles/schedulers-in-java-and-spring
     @Scheduled(cron = CRON_EXP)

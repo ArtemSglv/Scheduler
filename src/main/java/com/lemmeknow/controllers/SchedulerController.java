@@ -13,6 +13,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,6 +26,7 @@ public class SchedulerController {
 
     private List<SourceParseInformation> sourceParseInformations;
     private SourceParseInformation[] selectedInfos;
+    private Date time;
     private String theme = "smoothness";
     //<h:outputStylesheet library="controllers-omega" name="theme.css"/>
     //<link rel="stylesheet" type="text/css" href="#{request.contextPath}/themes/redmond/skin.css"/>
@@ -39,7 +42,7 @@ public class SchedulerController {
             // Data attached to the request.
             HttpEntity<String> requestBody = new HttpEntity<>(whatToParse, headers);
             // Send request with POST method.
-            return rt.postForObject(PARSER_URL, requestBody, String.class);
+            return rt.postForObject(LOCAL_PARSER_URL, requestBody, String.class);
         }catch (Exception e){
             logger.warn("Error while parsing " + whatToParse);
             return null;
@@ -97,7 +100,11 @@ public class SchedulerController {
 //        sourceParseInformations = new ArrayList<>();
         selectedInfos = new SourceParseInformation[sourceParseInformations.size()];
     }
+    //https://www.primefaces.org/showcase-ext/sections/timePicker/basicUsage.jsf
+    /*public Date TimeController(){
+        Calendar calendar = Calendar.getInstance();
 
+    }*/
 
     public List<SourceParseInformation> getSourceParseInformations() {
 
@@ -122,5 +129,13 @@ public class SchedulerController {
 
     public void setTheme(String theme) {
         this.theme = theme;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }

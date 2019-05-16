@@ -1,7 +1,7 @@
 <f:view
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:p="http://primefaces.org/ui">
+        xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -40,6 +40,14 @@
                 </p:dataTable>
                 <p:commandButton value="parse" action="#{schedulerController.parseSelected}" align="center"/>
                 <p:commandButton value="parse all" action="#{schedulerController.parseAll}" align="center"/>
+            </h:form>
+            <h:form>
+                <h:panelGrid id="timePickerGrid" columns="6"
+                             columnClasses="timePickerColumn1,timePickerColumn,timePickerColumn,timePickerColumn,timePickerColumn,timePickerColumn">
+                    <h:outputText value="Choose time"/>
+                    <pe:timePicker value="#{timePickerController.time3}" widgetVar="spinnerTimeWidget"
+                                   label="Spinner time picker"/>
+                </h:panelGrid>
             </h:form>
         </div>
     </h:body>

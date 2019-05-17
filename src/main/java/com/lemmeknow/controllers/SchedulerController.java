@@ -1,7 +1,6 @@
 package com.lemmeknow.controllers;
 
 
-import org.primefaces.extensions.event.TimeSelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -103,12 +102,12 @@ public class SchedulerController {
         selectedInfos = new SourceParseInformation[sourceParseInformations.size()];
     }
     //https://www.primefaces.org/showcase-ext/sections/timePicker/basicUsage.jsf
-    public void timeSelectListener(TimeSelectEvent timeSelectEvent){
+/*    public void timeSelectListener(TimeSelectEvent timeSelectEvent){
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Time select fired",
                 "Selected time: " + getFormattedTime(timeSelectEvent.getTime(), "HH:mm"));
         FacesContext.getCurrentInstance().addMessage(null, msg);
         logger.debug(time.toString());
-    }
+    }*/
 
     public List<SourceParseInformation> getSourceParseInformations() {
 

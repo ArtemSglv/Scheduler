@@ -14,6 +14,7 @@ import java.util.Set;
 public class PropertiesHandler {
 
     private PropertiesHandler() {
+
     }
 
     private static final String PROPERTIES_URI = "/home/deploy/nc-project/scheduler.properties";

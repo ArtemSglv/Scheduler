@@ -41,14 +41,6 @@
                 <p:commandButton value="parse" action="#{schedulerController.parseSelected}" align="center"/>
                 <p:commandButton value="parse all" action="#{schedulerController.parseAll}" align="center"/>
             </h:form>
-            <h:form>
-                <h:panelGrid id="timePickerGrid" columns="6"
-                             columnClasses="timePickerColumn1,timePickerColumn,timePickerColumn,timePickerColumn,timePickerColumn,timePickerColumn">
-                    <h:outputText value="Choose time"/>
-                    <pe:timePicker value="#{schedulerController.time}" widgetVar="spinnerTimeWidget" actionListener="#{schedulerController.timeSelectListener}"
-                                   label="Spinner time picker"/>
-                </h:panelGrid>
-            </h:form>
         </div>
     </h:body>
 </f:view>

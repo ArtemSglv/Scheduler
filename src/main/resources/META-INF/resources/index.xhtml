@@ -45,7 +45,7 @@
                 <h:panelGrid id="timePickerGrid" columns="6"
                              columnClasses="timePickerColumn1,timePickerColumn,timePickerColumn,timePickerColumn,timePickerColumn,timePickerColumn">
                     <h:outputText value="Choose time"/>
-                    <pe:timePicker value="#{timePickerController.time3}" widgetVar="spinnerTimeWidget"
+                    <pe:timePicker value="#{schedulerController.time}" widgetVar="spinnerTimeWidget" actionListener="#{schedulerController.timeSelectListener}"
                                    label="Spinner time picker"/>
                 </h:panelGrid>
             </h:form>

@@ -1,6 +1,7 @@
 package com.lemmeknow.controllers;
 
 
+import org.primefaces.extensions.event.TimeSelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -12,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,7 +44,7 @@ public class SchedulerController {
             // Data attached to the request.
             HttpEntity<String> requestBody = new HttpEntity<>(whatToParse, headers);
             // Send request with POST method.
-            return rt.postForObject(LOCAL_PARSER_URL, requestBody, String.class);
+            return rt.postForObject(PARSER_URL, requestBody, String.class);
         }catch (Exception e){
             logger.warn("Error while parsing " + whatToParse);
             return null;
@@ -101,10 +103,12 @@ public class SchedulerController {
         selectedInfos = new SourceParseInformation[sourceParseInformations.size()];
     }
     //https://www.primefaces.org/showcase-ext/sections/timePicker/basicUsage.jsf
-    /*public Date TimeController(){
-        Calendar calendar = Calendar.getInstance();
-
-    }*/
+    public void timeSelectListener(TimeSelectEvent timeSelectEvent){
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Time select fired",
+                "Selected time: " + getFormattedTime(timeSelectEvent.getTime(), "HH:mm"));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        logger.debug(time.toString());
+    }
 
     public List<SourceParseInformation> getSourceParseInformations() {
 
@@ -131,6 +135,7 @@ public class SchedulerController {
         this.theme = theme;
     }
 
+
     public Date getTime() {
         return time;
     }
@@ -138,4 +143,13 @@ public class SchedulerController {
     public void setTime(Date time) {
         this.time = time;
     }
+
+    private String getFormattedTime(Date time, String format) {
+        if (time == null) {
+            return null;
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        return simpleDateFormat.format(time);
+    }
+
 }

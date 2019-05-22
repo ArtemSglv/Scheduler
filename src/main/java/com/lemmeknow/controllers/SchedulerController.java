@@ -1,6 +1,8 @@
 package com.lemmeknow.controllers;
 
 
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -93,6 +95,17 @@ public class SchedulerController {
                 "Info", "OK"));
 
     }
+    public void onDateSelect(SelectEvent event){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        logger.info("Форма прокнула");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+
+    public void click() {
+        PrimeFaces.current().ajax().update("form:display");
+        PrimeFaces.current().executeScript("PF('dlg').show()");
+    }
 
 
 
@@ -102,12 +115,6 @@ public class SchedulerController {
         selectedInfos = new SourceParseInformation[sourceParseInformations.size()];
     }
     //https://www.primefaces.org/showcase-ext/sections/timePicker/basicUsage.jsf
-/*    public void timeSelectListener(TimeSelectEvent timeSelectEvent){
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Time select fired",
-                "Selected time: " + getFormattedTime(timeSelectEvent.getTime(), "HH:mm"));
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        logger.debug(time.toString());
-    }*/
 
     public List<SourceParseInformation> getSourceParseInformations() {
 

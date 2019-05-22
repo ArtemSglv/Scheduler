@@ -1,7 +1,7 @@
 <f:view
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:p="http://primefaces.org/ui">
+        xmlns:p="http://primefaces.org/ui" >
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -36,10 +36,17 @@
                     <p:column headerText="Description">
                         <h:outputText value="#{sourceInfo.description}"/>
                     </p:column>
-
                 </p:dataTable>
                 <p:commandButton value="parse" action="#{schedulerController.parseSelected}" align="center"/>
                 <p:commandButton value="parse all" action="#{schedulerController.parseAll}" align="center"/>
+
+                <h:outputText value="Time:"/>
+                <h:outputText value="#{schedulerController.time}">
+                    <f:convertDateTime pattern="MM/dd/yyyy"/>
+                </h:outputText>
+                <p:datePicker id="time" value="#{schedulerController.time}" showTime="true">
+                    <p:ajax event="dateSelect" listener="#{schedulerController.onDateSelect}" />
+                </p:datePicker>
             </h:form>
         </div>
     </h:body>

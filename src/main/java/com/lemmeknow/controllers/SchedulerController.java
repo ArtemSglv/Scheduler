@@ -19,20 +19,18 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
 
 
 @Named
 public class SchedulerController {
     private final static String LOCAL_PARSER_URL = "http://localhost:8094/parser/parse";
-	private final static String PARSER_URL = "http://lemmeknow.tk:8094/parser/parse";
+	private final static String PARSER_URL = "http://lemmeknow.tk/parser/parse";
 	private final static String PARSER1_URL = "/parser/parse";
 
     private List<SourceParseInformation> sourceParseInformations;
     private SourceParseInformation[] selectedInfos;
     private Date time;
-    private String theme = "smoothness";
-    //<h:outputStylesheet library="controllers-omega" name="theme.css"/>
-    //<link rel="stylesheet" type="text/css" href="#{request.contextPath}/themes/redmond/skin.css"/>
     private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
 
 
@@ -95,23 +93,25 @@ public class SchedulerController {
                 "Info", "OK"));
 
     }
+
     public void onDateSelect(SelectEvent event){
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        logger.info("Форма прокнула");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+        new Scheduler().reSchedule(Scheduler.dateToCron(time));
+        logger.info("Новая дата парсинга " + time);
+        //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
 
+
+    /*
     public void click() {
         PrimeFaces.current().ajax().update("form:display");
         PrimeFaces.current().executeScript("PF('dlg').show()");
     }
-
+*/
 
 
     public void init() throws IOException {
         sourceParseInformations = SourceParseInformation.getInfoForTable();
-//        sourceParseInformations = new ArrayList<>();
         selectedInfos = new SourceParseInformation[sourceParseInformations.size()];
     }
     //https://www.primefaces.org/showcase-ext/sections/timePicker/basicUsage.jsf
@@ -133,15 +133,6 @@ public class SchedulerController {
         this.selectedInfos = selectedInfos;
     }
 
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
-
     public Date getTime() {
         return time;
     }
@@ -149,6 +140,8 @@ public class SchedulerController {
     public void setTime(Date time) {
         this.time = time;
     }
+
+
 
     private String getFormattedTime(Date time, String format) {
         if (time == null) {

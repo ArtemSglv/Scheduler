@@ -28,11 +28,11 @@ public class SchedulerController {
     private List<SourceParseInformation> sourceParseInformations;
     private SourceParseInformation[] selectedInfos;
     private Date parsingTime;
-    private Date updatingTime;
+    //private Date updatingTime;
     private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
     private Scheduler parsingTask = new Scheduler();
-    private Scheduler updatingTask = new Scheduler();
-    private String updatingFrequency;
+    //private Scheduler updatingTask = new Scheduler();
+    //private String updatingFrequency;
     private String parsingFrequency = null;
 
 
@@ -103,19 +103,12 @@ public class SchedulerController {
         logger.info("Новая дата парсинга " + parsingTime);
         //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
-    public void onUpdatingDateSelect(SelectEvent event){
+/*    public void onUpdatingDateSelect(SelectEvent event){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         logger.info("updatingTime:" + updatingTime + "/n" + updatingFrequency);
         updatingTask.reSchedule(Scheduler.dateToCron(updatingTime, updatingFrequency));
         logger.info("Новое время обновления " + updatingTime);
         //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-
-
-    /*
-    public void click() {
-        PrimeFaces.current().ajax().update("form:display");
-        PrimeFaces.current().executeScript("PF('dlg').show()");
     }
 */
 
@@ -151,6 +144,7 @@ public class SchedulerController {
         this.parsingTime = parsingTime;
     }
 
+/*
     public Date getUpdatingTime() {
         return updatingTime;
     }
@@ -159,13 +153,6 @@ public class SchedulerController {
         this.updatingTime = updatingTime;
     }
 
-    private String getFormattedTime(Date time, String format) {
-        if (time == null) {
-            return null;
-        }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-        return simpleDateFormat.format(time);
-    }
 
     public String getUpdatingFrequency() {
         return updatingFrequency;
@@ -182,4 +169,21 @@ public class SchedulerController {
     public void setParsingFrequency(String parsingFrequency) {
         this.parsingFrequency = parsingFrequency;
     }
+    */
 }
+/* т.к. мистер xhtml ругается на закомментированный код, то пусть кусок полежит здесь
+<!--              <h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
+                    <h:outputText value="#{schedulerController.updatingTime}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:outputText>
+                    <p:calendar id="updatingdatetime" value="#{schedulerController.updatingTime}" pattern="HH:mm:ss" timeOnly="true">
+                        <p:ajax event="dateSelect" listener="#{schedulerController.onUpdatingDateSelect}"/>
+                    </p:calendar>
+                    <p:outputLabel for="updatingFrequency" value="How often?"/>
+                    <p:selectOneRadio id="updatingFrequency" value="#{schedulerController.updatingFrequency}" unslectable="true">
+                        <f:selectItem itemLabel="daily" itemValue="daily"/>
+                        <f:selectItem itemLabel="weekly" itemValue="weekly"/>
+                    </p:selectOneRadio>
+                </h:panelGrid> -->
+*/
+

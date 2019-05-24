@@ -48,21 +48,6 @@
                     <p:ajax event="dateSelect" listener="#{schedulerController.onParsingDateSelect}"/>
                 </p:calendar>
 
-
-                <h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
-                    <h:outputText value="#{schedulerController.updatingTime}">
-                        <f:convertDateTime pattern="HH:mm:ss" />
-                    </h:outputText>
-                    <p:calendar id="updatingdatetime" value="#{schedulerController.updatingTime}" pattern="HH:mm:ss" timeOnly="true">
-                        <p:ajax event="dateSelect" listener="#{schedulerController.onUpdatingDateSelect}"/>
-                    </p:calendar>
-                    <p:outputLabel for="updatingFrequency" value="How often?"/>
-                    <p:selectOneRadio id="updatingFrequency" value="#{schedulerController.updatingFrequency}" unslectable="true">
-                        <f:selectItem itemLabel="daily" itemValue="daily"/>
-                        <f:selectItem itemLabel="weekly" itemValue="weekly"/>
-                    </p:selectOneRadio>
-                </h:panelGrid>
-
             </h:form>
         </div>
     </h:body>

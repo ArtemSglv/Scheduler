@@ -1,7 +1,7 @@
 <f:view
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:p="http://primefaces.org/ui" >
+        xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -16,8 +16,9 @@
 
         <div>
             <h:form>
+                <p:autoUpdate/>
                 <h2 align="center">Here you can force parsing some resources</h2>
-                <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"/>
+                <p:messages id="messages" showDetail="true" closable="true"/>
                 <p:dataTable var="sourceInfo"
                              rowKey="#{sourceInfo.name}"
                              value="#{schedulerController.sourceParseInformations}"
@@ -40,15 +41,29 @@
                 <p:commandButton value="parse" action="#{schedulerController.parseSelected}" align="center"/>
                 <p:commandButton value="parse all" action="#{schedulerController.parseAll}" align="center"/>
 
-                <h:outputText value="Time:"/>
-                <h:outputText value="#{schedulerController.time}">
-             <!--       <f:convertDateTime pattern="MM/dd/yyyy"/> -->
-                </h:outputText>
-                <p:calendar id="datetime" value="#{schedulerController.time}" pattern="MM/dd/yyyy HH:mm:ss" >
-                   <p:ajax event="dateSelect" listener="#{schedulerController.onDateSelect}" />
+                <h:outputText value="Parsing time:"/>
+                <h:outputText value="#{schedulerController.parsingTime}"/>
+                <p:calendar id="parsingdatetime" value="#{schedulerController.parsingTime}"
+                            pattern="MM/dd/yyyy HH:mm:ss">
+                    <p:ajax event="dateSelect" listener="#{schedulerController.onParsingDateSelect}"/>
                 </p:calendar>
 
-                   </h:form>
-               </div>
-           </h:body>
-       </f:view>
+
+                <h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
+                    <h:outputText value="#{schedulerController.updatingTime}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:outputText>
+                    <p:calendar id="updatingdatetime" value="#{schedulerController.updatingTime}" pattern="HH:mm:ss" timeOnly="true">
+                        <p:ajax event="dateSelect" listener="#{schedulerController.onUpdatingDateSelect}"/>
+                    </p:calendar>
+                    <p:outputLabel for="updatingFrequency" value="How often?"/>
+                    <p:selectOneRadio id="updatingFrequency" value="#{schedulerController.updatingFrequency}" unslectable="true">
+                        <f:selectItem itemLabel="daily" itemValue="daily"/>
+                        <f:selectItem itemLabel="weekly" itemValue="weekly"/>
+                    </p:selectOneRadio>
+                </h:panelGrid>
+
+            </h:form>
+        </div>
+    </h:body>
+</f:view>

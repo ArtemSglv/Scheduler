@@ -1,6 +1,7 @@
 package com.lemmeknow.controllers;
 
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,10 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
 
 
 @Named
@@ -27,14 +30,8 @@ public class SchedulerController {
 
     private List<SourceParseInformation> sourceParseInformations;
     private SourceParseInformation[] selectedInfos;
-    private Date parsingTime;
-    private Date updatingTime;
+    private Date time;
     private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
-    private Scheduler parsingTask = new Scheduler();
-    private Scheduler updatingTask = new Scheduler();
-    private String updatingFrequency;
-    private String parsingFrequency = null;
-
 
 
     public String parse(String whatToParse){
@@ -97,17 +94,10 @@ public class SchedulerController {
 
     }
 
-    public void onParsingDateSelect(SelectEvent event){
+    public void onDateSelect(SelectEvent event){
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        parsingTask.reSchedule(Scheduler.dateToCron(parsingTime, parsingFrequency));
-        logger.info("Новая дата парсинга " + parsingTime);
-        //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-    public void onUpdatingDateSelect(SelectEvent event){
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        logger.info("updatingTime:" + updatingTime + "/n" + updatingFrequency);
-        updatingTask.reSchedule(Scheduler.dateToCron(updatingTime, updatingFrequency));
-        logger.info("Новое время обновления " + updatingTime);
+        new Scheduler().reSchedule(Scheduler.dateToCron(time));
+        logger.info("Новая дата парсинга " + time);
         //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
 
@@ -143,21 +133,15 @@ public class SchedulerController {
         this.selectedInfos = selectedInfos;
     }
 
-    public Date getParsingTime() {
-        return parsingTime;
+    public Date getTime() {
+        return time;
     }
 
-    public void setParsingTime(Date parsingTime) {
-        this.parsingTime = parsingTime;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
-    public Date getUpdatingTime() {
-        return updatingTime;
-    }
 
-    public void setUpdatingTime(Date updatingTime) {
-        this.updatingTime = updatingTime;
-    }
 
     private String getFormattedTime(Date time, String format) {
         if (time == null) {
@@ -167,19 +151,4 @@ public class SchedulerController {
         return simpleDateFormat.format(time);
     }
 
-    public String getUpdatingFrequency() {
-        return updatingFrequency;
-    }
-
-    public void setUpdatingFrequency(String updatingFrequency) {
-        this.updatingFrequency = updatingFrequency;
-    }
-
-    public String getParsingFrequency() {
-        return parsingFrequency;
-    }
-
-    public void setParsingFrequency(String parsingFrequency) {
-        this.parsingFrequency = parsingFrequency;
-    }
 }

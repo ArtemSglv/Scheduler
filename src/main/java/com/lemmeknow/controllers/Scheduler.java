@@ -19,8 +19,8 @@ import java.util.concurrent.ScheduledFuture;
 public class Scheduler implements Runnable {
 
     private static Logger logger = LoggerFactory.getLogger(Scheduler.class);
-    private ScheduledFuture scheduledFuture;
-    private TaskScheduler taskScheduler;
+    ScheduledFuture scheduledFuture;
+    TaskScheduler taskScheduler;
     //this method will kill previous scheduler if exists and will create a new scheduler with given cron expression
     public  void reSchedule(String cronExpressionStr){
         if(taskScheduler == null){
@@ -33,26 +33,32 @@ public class Scheduler implements Runnable {
         logger.info("Расписание переустановлено на: "+ cronExpressionStr);
     }
 
-
-//second, minute, hour, day of month, month, day(s) of week
-    public static String dateToCron(Date date, String frequency){
-        logger.info("date:" + date + " frequency:" + frequency);
-        LocalDateTime localDate = new java.sql.Timestamp(date.getTime()).toLocalDateTime();
-        String cronExp;
-        if (localDate.getYear() != 1970 && frequency == null)
-            cronExp = localDate.getSecond() + " " + localDate.getMinute() + " " + localDate.getHour() + " " + localDate.getDayOfMonth() + " " + localDate.getMonthValue() + " ?";
-        else {
-            cronExp = localDate.getSecond() + " " + localDate.getMinute() + " " + localDate.getHour() + " ";
+    /*
+    //https://dzone.com/articles/schedulers-in-java-and-spring
+        @Scheduled(cron = CRON_EXP)
+        public void parserScheduler(){
+            logger.info("time to parse everything");
             try {
-                switch (frequency){
-                    case "daily"  : {cronExp += "* * ?"; break;}
-                    case "weekly" : {cronExp += "? * 1"; break;}
-                }
-            } catch (NullPointerException npe){
-                cronExp += LocalDateTime.now().getDayOfMonth() + " " + LocalDateTime.now().getMonthValue()+ " ?";
+                new SchedulerController().parseAll();
+                logger.info("everything is OK");
+            } catch (IOException e) {
+                logger.info("something gone wrong");
+                e.printStackTrace();
             }
+
         }
-        logger.info("cronExp= " + cronExp);
+    // для тестирования
+        @Scheduled(fixedRate = 6000)
+        public void testScheduler(){
+            //parseSelected("https://www.afisha.ru");
+            System.out.println("Now: " + new Date());
+        }*/
+//second, minute, hour, day of month, month, day(s) of week
+    public static String dateToCron(Date date){
+        LocalDateTime localDate = new java.sql.Timestamp(date.getTime()).toLocalDateTime();
+        String cronExp = localDate.getSecond() + " " + localDate.getMinute() + " " + localDate.getHour() + " ? " + localDate.getMonthValue() + " ?";
+
+        logger.debug("cronExp= ", cronExp);
         return cronExp;
     }
 

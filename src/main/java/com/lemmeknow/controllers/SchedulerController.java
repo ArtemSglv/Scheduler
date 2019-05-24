@@ -1,6 +1,7 @@
 package com.lemmeknow.controllers;
 
 
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,10 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
 
 
 @Named
@@ -27,15 +30,8 @@ public class SchedulerController {
 
     private List<SourceParseInformation> sourceParseInformations;
     private SourceParseInformation[] selectedInfos;
-    private Date parsingTime;
-    //private Date updatingTime;
+    private Date time;
     private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
-    //private Scheduler parsingTask = new Scheduler();
-    //private Scheduler updatingTask = new Scheduler();
-    //private String updatingFrequency;
-    //private String parsingFrequency;
-
-
 
     public String parse(String whatToParse){
         try {
@@ -97,20 +93,13 @@ public class SchedulerController {
 
     }
 
-    public void onParsingDateSelect(SelectEvent event){
+
+    public void onDateSelect(SelectEvent event){
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        new Scheduler().reSchedule(Scheduler.dateToCron(parsingTime, null));
-        logger.info("Новая дата парсинга " + parsingTime);
+        new Scheduler().reSchedule(Scheduler.dateToCron(time));
+        logger.info("Новая дата парсинга " + time);
         //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
-/*    public void onUpdatingDateSelect(SelectEvent event){
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        logger.info("updatingTime:" + updatingTime + "/n" + updatingFrequency);
-        updatingTask.reSchedule(Scheduler.dateToCron(updatingTime, updatingFrequency));
-        logger.info("Новое время обновления " + updatingTime);
-        //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-*/
 
 
     public void init() throws IOException {
@@ -136,54 +125,13 @@ public class SchedulerController {
         this.selectedInfos = selectedInfos;
     }
 
-    public Date getParsingTime() {
-        return parsingTime;
+    public Date getTime() {
+        return time;
     }
 
-    public void setParsingTime(Date parsingTime) {
-        this.parsingTime = parsingTime;
+    public void setTime(Date time) {
+        this.time = time;
     }
-
-/*
-    public Date getUpdatingTime() {
-        return updatingTime;
-    }
-
-    public void setUpdatingTime(Date updatingTime) {
-        this.updatingTime = updatingTime;
-    }
-
-
-    public String getUpdatingFrequency() {
-        return updatingFrequency;
-    }
-
-    public void setUpdatingFrequency(String updatingFrequency) {
-        this.updatingFrequency = updatingFrequency;
-    }
-
-    public String getParsingFrequency() {
-        return parsingFrequency;
-    }
-
-    public void setParsingFrequency(String parsingFrequency) {
-        this.parsingFrequency = parsingFrequency;
-    }
-    */
 }
-/* т.к. мистер xhtml ругается на закомментированный код, то пусть кусок полежит здесь
-<!--              <h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
-                    <h:outputText value="#{schedulerController.updatingTime}">
-                        <f:convertDateTime pattern="HH:mm:ss" />
-                    </h:outputText>
-                    <p:calendar id="updatingdatetime" value="#{schedulerController.updatingTime}" pattern="HH:mm:ss" timeOnly="true">
-                        <p:ajax event="dateSelect" listener="#{schedulerController.onUpdatingDateSelect}"/>
-                    </p:calendar>
-                    <p:outputLabel for="updatingFrequency" value="How often?"/>
-                    <p:selectOneRadio id="updatingFrequency" value="#{schedulerController.updatingFrequency}" unslectable="true">
-                        <f:selectItem itemLabel="daily" itemValue="daily"/>
-                        <f:selectItem itemLabel="weekly" itemValue="weekly"/>
-                    </p:selectOneRadio>
-                </h:panelGrid> -->
-*/
+
 

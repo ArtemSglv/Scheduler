@@ -41,13 +41,12 @@
                 <p:commandButton value="parse" action="#{schedulerController.parseSelected}" align="center"/>
                 <p:commandButton value="parse all" action="#{schedulerController.parseAll}" align="center"/>
 
-                <h:outputText value="Parsing time:"/>
-                <h:outputText value="#{schedulerController.parsingTime}"/>
-                <p:calendar id="parsingdatetime" value="#{schedulerController.parsingTime}"
-                            pattern="MM/dd/yyyy HH:mm:ss">
-                    <p:ajax event="dateSelect" listener="#{schedulerController.onParsingDateSelect}"/>
+                <h:outputText value="Time:"/>
+                <h:outputText value="#{schedulerController.time}">
+                </h:outputText>
+                <p:calendar id="datetime" value="#{schedulerController.time}" pattern="MM/dd/yyyy HH:mm:ss">
+                    <p:ajax event="dateSelect" listener="#{schedulerController.onDateSelect}"/>
                 </p:calendar>
-
             </h:form>
         </div>
     </h:body>

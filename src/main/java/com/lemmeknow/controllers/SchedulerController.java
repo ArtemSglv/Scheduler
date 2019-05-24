@@ -30,10 +30,10 @@ public class SchedulerController {
     private Date parsingTime;
     //private Date updatingTime;
     private Logger logger = LoggerFactory.getLogger(SchedulerController.class);
-    private Scheduler parsingTask = new Scheduler();
+    //private Scheduler parsingTask = new Scheduler();
     //private Scheduler updatingTask = new Scheduler();
     //private String updatingFrequency;
-    private String parsingFrequency = null;
+    //private String parsingFrequency;
 
 
 
@@ -99,7 +99,7 @@ public class SchedulerController {
 
     public void onParsingDateSelect(SelectEvent event){
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        parsingTask.reSchedule(Scheduler.dateToCron(parsingTime, parsingFrequency));
+        new Scheduler().reSchedule(Scheduler.dateToCron(parsingTime, null));
         logger.info("Новая дата парсинга " + parsingTime);
         //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }

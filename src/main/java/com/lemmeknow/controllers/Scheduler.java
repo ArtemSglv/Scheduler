@@ -35,12 +35,12 @@ public class Scheduler implements Runnable {
 
 //second, minute, hour, day of month, month, day(s) of week
     public static String dateToCron(Date date, String frequency){
-        logger.info("date:" + date + " frequency:" + frequency);
+        logger.info("date:" + date);
         LocalDateTime localDate = new java.sql.Timestamp(date.getTime()).toLocalDateTime();
         String cronExp;
-        if (localDate.getYear() != 1970 && frequency == null)
+        //if (localDate.getYear() != 1970 && frequency == null)
             cronExp = localDate.getSecond() + " " + localDate.getMinute() + " " + localDate.getHour() + " " + localDate.getDayOfMonth() + " " + localDate.getMonthValue() + " ?";
-        else {
+        /*else {
             cronExp = localDate.getSecond() + " " + localDate.getMinute() + " " + localDate.getHour() + " ";
             try {
                 switch (frequency){
@@ -50,7 +50,7 @@ public class Scheduler implements Runnable {
             } catch (NullPointerException npe){
                 cronExp += LocalDateTime.now().getDayOfMonth() + " " + LocalDateTime.now().getMonthValue()+ " ?";
             }
-        }
+        }*/
         logger.info("cronExp= " + cronExp);
         return cronExp;
     }

@@ -17,8 +17,8 @@ public class PropertiesHandler {
 
     }
 
-    private static final String PROPERTIES_URI = "/home/deploy/nc-project/scheduler.properties";
-    //private static final String PROPERTIES_URI = "src/main/resources/scheduler.properties";
+    //private static final String PROPERTIES_URI = "/home/deploy/nc-project/scheduler.properties";
+    private static final String PROPERTIES_URI = "src/main/resources/scheduler.properties";
     //private static final String PROPERTIES_URI = System.getenv().get("");
     private static Logger logger = LoggerFactory.getLogger(PropertiesHandler.class);
 

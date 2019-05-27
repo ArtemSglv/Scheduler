@@ -46,7 +46,7 @@ public class SchedulerController {
             // Send request with POST method.
             return rt.postForObject(PARSER_URL, requestBody, String.class);
         }catch (Exception e){
-            logger.warn("Error while parsing(parse error) " + whatToParse);
+            logger.error("Error while parsing(parse error) " + whatToParse, e);
             return null;
         }
     }

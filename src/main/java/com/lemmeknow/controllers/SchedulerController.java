@@ -45,7 +45,7 @@ public class SchedulerController {
             // Send request with POST method.
             return rt.postForObject(PARSER_URL, requestBody, String.class);
         }catch (Exception e){
-            logger.warn("Error while parsing " + whatToParse);
+            logger.warn("Error while parsing(parse error) " + whatToParse);
             return null;
         }
     }
@@ -56,6 +56,7 @@ public class SchedulerController {
         Boolean isOk = true;
         for (int i = 0; i < selectedInfos.length; i++) {
             whatToParse = PropertiesHandler.getUrlByName(selectedInfos[i].getName());
+
             answer = parse(whatToParse);
             if(answer.equals("OK")){
                 selectedInfos[i].setDate(LocalDateTime.now());//если спарсилось, то меняем дату последнего парсинга на сейчас
@@ -65,7 +66,7 @@ public class SchedulerController {
                 isOk = false;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                         "Warning!", "error while parsing " + whatToParse));
-                System.out.println("error while parsing " + whatToParse);
+                System.out.println("error while parsing(parse selected error) " + whatToParse);
             }
         }
         if (isOk) {

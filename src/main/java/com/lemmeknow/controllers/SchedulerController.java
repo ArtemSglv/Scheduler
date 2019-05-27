@@ -35,6 +35,7 @@ public class SchedulerController {
 
 
     public String parse(String whatToParse){
+        logger.info("input" + whatToParse);
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);

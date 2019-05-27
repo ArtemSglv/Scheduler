@@ -13,11 +13,11 @@
     </h:head>
 
     <h:body>
-
         <div>
             <h:form>
+                <p:autoUpdate/>
                 <h2 align="center">Here you can force parsing some resources</h2>
-                <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"/>
+                <p:messages id="messages" showDetail="true" closable="true" />
                 <p:dataTable var="sourceInfo"
                              rowKey="#{sourceInfo.name}"
                              value="#{schedulerController.sourceParseInformations}"

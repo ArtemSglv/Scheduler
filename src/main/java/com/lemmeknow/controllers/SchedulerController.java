@@ -68,8 +68,11 @@ public class SchedulerController {
                 System.out.println("error while parsing " + whatToParse);
             }
         }
-        if (isOk) FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "Info", "OK"));
+        if (isOk) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Info", "OK"));
+            logger.info("parseSelected is OK");
+        }
 
     }
     public void parseAll() throws IOException {

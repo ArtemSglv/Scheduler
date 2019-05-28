@@ -25,7 +25,7 @@ import java.util.concurrent.ScheduledFuture;
 @Named
 public class SchedulerController {
     private final static String LOCAL_PARSER_URL = "http://localhost:8094/parser/parse";
-	private final static String PARSER_URL = "http://lemmeknow.tk/parser/parse";
+	private final static String PARSER_URL = "http://lemmeknow.tk:8094/parser/parse";
 	private final static String PARSER1_URL = "/parser/parse";
 
     private List<SourceParseInformation> sourceParseInformations;
@@ -67,7 +67,7 @@ public class SchedulerController {
                 isOk = false;
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                         "Warning!", "error while parsing " + whatToParse));
-                System.out.println("error while parsing(parse selected error) " + whatToParse);
+                logger.error("error while parsing(parse selected error) " + whatToParse);
             }
         }
         if (isOk) {

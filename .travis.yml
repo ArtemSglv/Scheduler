@@ -1,13 +1,9 @@
 language: java
 jdk: oraclejdk8
 script: mvn clean install -B
-notifications:
-  slack:
-    rooms:
-      secure: QrAJFPozhc1NB7ikrd9tm8Rd2BkhyWIyy2XMliNZSyPqqEXHpG/iwri9Y/eQeLLzuHqiEylY7J2n9VOd4jhuygBJ68EaosC06DRKNLO6EtQsfupJ2YWy+vcj7v3pvROR4qq+Mu+TtOjB2jLNcR6hmU4BkDIJkT9yQ2Eemw0a2fqqm/CMib9jiKNnK4WxsOGBp5fZFpa4g3FgUyCcPji572zPZrMs1mhGd8z98ohHK26kPqYkZ6cbbdwScjGy7mtaDGofkAIBoiTZFmYSxqkjFunF3kW7qMwv69L5cXX+Z66Gw4P9w8B2CqEz+52g2DjCfxhBTmLeyh8FKjNjt9mhTK3ilU9WcxYLd7emyHfRyGtNxRGvtYi54RbFmr2bkk6wIBrhwGZOYF6H4E3kRDa5XiCMM8NUpNEiALkljTpQMebhDVO0kPB6xIFBHLfg+SO85v1I+pij2k03hXB3vzPmAnxsYSyNcIvAlGdTAJoVr+8Jbp3qejujs8R7RpbWHhdFg2DnQ3EitvYkor+B3htYwO3xn9BgWvUt/DTMA/pvgGjnDpX/qE6rIJ7V7zNzu0CUbP4NL2a/dcJsh+8vcSWbIZt9gPTFuhiIcrzmx/smnnPGImKBk4xvHm3smemU8V+ToH3doDas9jPBS81RkasongQ6X0JFG9L8vzcUB6bBX3k=
 addons:
   ssh_known_hosts:
-  - 165.22.74.27
+    - 207.154.240.205
   - lemmeknow.tk
 branches:
   only:
@@ -16,7 +12,7 @@ env:
   global:
   - REMOTEAPPDIR=/home/deploy/nc-project
   - REMOTEUSER=deploy
-  - REMOTEHOST=165.22.74.27
+  - REMOTEHOST=207.154.240.205
 before_install:
 - openssl aes-256-cbc -K $encrypted_2c9f86b9c344_key -iv $encrypted_2c9f86b9c344_iv
   -in deploy.enc -out deploy -d
